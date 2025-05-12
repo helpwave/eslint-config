@@ -8,7 +8,7 @@
   },
   "homepage": "https://helpwave.de",
   "repository": {
-    "url": "https://github.com/helpwave/current"
+    "url": "https://github.com/helpwave/eslint-config"
   },
   "license": "MPL-2.0",
   "version": "0.0.1",
