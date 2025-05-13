@@ -1,4 +1,4 @@
-import { RuleTester } from 'eslint';
+import { RuleTester } from 'eslint'
 import rule from '../no-empty-then.js'
 
 const ruleTester = new RuleTester({
@@ -6,7 +6,7 @@ const ruleTester = new RuleTester({
     ecmaVersion: 2021,
     sourceType: 'module',
   },
-});
+})
 
 // Test cases for the rule
 ruleTester.run('no-empty-then', rule, {
@@ -45,6 +45,6 @@ ruleTester.run('no-empty-then', rule, {
       `,
     },
   ],
-});
+})
 
-console.log('All tests passed!');
+console.log('All tests passed!')

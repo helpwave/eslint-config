@@ -13,6 +13,9 @@ const recommended = [
   reactRecommendedEslint.configs.flat.recommended,
   customRules.configs.recommended,
   {
+    ignores: ['node_modules/']
+  },
+  {
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
