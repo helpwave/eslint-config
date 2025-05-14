@@ -19,6 +19,11 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
           dry-run: true
       - name: Test print
+        if: ${{ steps.publish.outputs.type == '' }}
         run: |
-          echo "${{ steps.publish.outputs.type }}"
+          echo "❌ No version change detected. Refusing to publish."
           exit 1
+
+      - name: Report new version
+        if: ${{ steps.publish.outputs.type != '' }}
+        run: echo "✅ Version changed to ${{ steps.publish.outputs.version }}"
