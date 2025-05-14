@@ -1,7 +1,7 @@
 {
   "name": "@helpwave/eslint-config",
   "description": "helpwave's eslint rules",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "type": "module",
   "main": "index.js",
   "author": "helpwave <support@helpwave.de> (https://helpwave.de)",

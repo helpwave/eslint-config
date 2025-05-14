@@ -12,11 +12,18 @@ jobs:
         with:
           node-version: "20"
       - run: npm ci
-      - run: npm test
-      - uses: JS-DevTools/npm-publish@v3
+      - name: Dry Run Publish
+        uses: JS-DevTools/npm-publish@v3
         id: publish
         with:
           token: ${{ secrets.NPM_TOKEN }}
           dry-run: true
-      - if: ${{ steps.publish.outputs.type }}
-        run: echo "Version changed to ${{ steps.publish.outputs.version }}!"
+      - name: Test print
+        if: ${{ steps.publish.outputs.type == '' }}
+        run: |
+          echo "❌ No version change detected. Refusing to publish."
+          exit 1
+
+      - name: Report new version
+        if: ${{ steps.publish.outputs.type != '' }}
+        run: echo "✅ Version changed to ${{ steps.publish.outputs.version }}"
