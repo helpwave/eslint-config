@@ -1,3 +1,5 @@
+name: Dry Run Publish
+
 on:
   push:
 
