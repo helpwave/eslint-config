@@ -18,12 +18,7 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           dry-run: true
-      - name: Check if version changed
-        if: ${{ steps.publish.outputs.type == 'none' }}
+      - name: Test print
         run: |
-          echo "❌ No version change detected. Refusing to publish."
+          echo "${{ steps.publish.outputs.type == 'none' }}"
           exit 1
-
-      - name: Report new version
-        if: ${{ steps.publish.outputs.type != 'none' }}
-        run: echo "✅ Version changed to ${{ steps.publish.outputs.version }}"
