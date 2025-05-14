@@ -20,5 +20,5 @@ jobs:
           dry-run: true
       - name: Test print
         run: |
-          echo "${{ steps.publish.outputs.type == 'none' }}"
+          echo "${{ steps.publish.outputs.type }}"
           exit 1
