@@ -1,7 +1,7 @@
 {
   "name": "@helpwave/eslint-config",
   "description": "helpwave's eslint rules",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "type": "module",
   "main": "index.js",
   "author": "helpwave <support@helpwave.de> (https://helpwave.de)",
@@ -23,7 +23,7 @@
     "test": "node custom-rules/tests/no-empty-then.test.js && exit 0",
     "lint": "eslint ."
   },
-  "peerDependencies": {
+  "dependencies": {
     "eslint": "^9.0.0",
     "typescript": "^5.0.0",
     "eslint-plugin-react": "^7.0.0",
