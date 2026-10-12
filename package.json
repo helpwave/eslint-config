@@ -1,7 +1,7 @@
 {
   "name": "@helpwave/eslint-config",
   "description": "helpwave's eslint rules",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "type": "module",
   "main": "index.js",
   "author": "helpwave <support@helpwave.de> (https://helpwave.de)",
@@ -20,27 +20,33 @@
     "helpwave"
   ],
   "scripts": {
-    "test": "node custom-rules/tests/no-empty-then.test.js && exit 0",
+    "test": "node custom-rules/tests/no-empty-then.test.js && node test/loads-without-next-plugin.test.js",
     "lint": "eslint ."
   },
   "dependencies": {
-    "eslint": "^9.0.0",
-    "typescript": "^5.0.0",
-    "eslint-plugin-react": "^7.0.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "@eslint/js": "^9.0.0",
-    "@stylistic/eslint-plugin": "^2.0.0",
-    "@next/eslint-plugin-next": "^15.0.0",
-    "typescript-eslint": "^8.32.1"
+    "eslint": "^9.39.4",
+    "typescript": ">=5.9.3 <6.1.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "@eslint/js": "^9.39.4",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "typescript-eslint": "^8.71.1"
   },
   "devDependencies": {
-    "eslint": "^9.0.0",
-    "typescript": "^5.0.0",
-    "eslint-plugin-react": "^7.0.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "@eslint/js": "^9.0.0",
-    "@stylistic/eslint-plugin": "^2.0.0",
-    "@next/eslint-plugin-next": "^15.0.0",
-    "typescript-eslint": "^8.32.1"
+    "eslint": "^9.39.4",
+    "typescript": ">=5.9.3 <6.1.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "@eslint/js": "^9.39.4",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "typescript-eslint": "^8.71.1"
+  },
+  "peerDependencies": {
+    "@next/eslint-plugin-next": "^15.0.0 || ^16.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@next/eslint-plugin-next": {
+      "optional": true
+    }
   }
 }
