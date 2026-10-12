@@ -1,10 +1,13 @@
+import { createRequire } from 'node:module'
+import path from 'node:path'
 import reactRecommendedEslint from 'eslint-plugin-react'
 import eslint from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import stylisticEslint from '@stylistic/eslint-plugin'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
 import customRules from './custom-rules/index.js'
-import nextConfig from '@next/eslint-plugin-next'
+
+const require = createRequire(import.meta.url)
 
 /** @type {import('eslint').Linter.Config} */
 const recommended = [
@@ -35,7 +38,7 @@ const recommended = [
       'no-use-before-define': 'off',
       'semi': ['warn', 'never'],
       'jsx-quotes': ['error', 'prefer-double'],
-      '@stylistic/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
+      '@stylistic/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: 'always' }],
       '@stylistic/object-curly-spacing': ['warn', 'always'],
       '@stylistic/function-paren-newline': ['warn', 'consistent'],
       'no-trailing-spaces': ['error'],
@@ -76,7 +79,6 @@ const recommended = [
         logical: 'parens-new-line',
         prop: 'parens-new-line'
       }],
-      //'custom-rules/no-empty-then': 'error',
     },
     settings: {
       react: {
@@ -86,25 +88,46 @@ const recommended = [
   },
 ]
 
-/** @type {import('eslint').Linter.Config} */
-const nextExtension = [
-  ...recommended,
-  {
-    ignores: ['build/**', '.next/*']
-  },
-  {
-    plugins: {
-      '@next/next': nextConfig,
-    },
-    rules: {
-      ...nextConfig.configs.recommended.rules,
-      ...nextConfig.configs['core-web-vitals'].rules,
-      '@next/next/no-duplicate-head': 'off', // This rule produces errors for
+function loadNextPlugin() {
+  const requirers = [
+    require,
+    createRequire(path.join(process.cwd(), 'package.json')),
+  ]
+  for (const load of requirers) {
+    try {
+      return load('@next/eslint-plugin-next')
+    } catch (error) {
+      if (!error || error.code !== 'MODULE_NOT_FOUND') {
+        throw error
+      }
     }
-  },
-]
+  }
+  throw new Error('nextExtension requires @next/eslint-plugin-next to be installed')
+}
+
+function createNextExtension() {
+  const nextConfig = loadNextPlugin()
+  return [
+    ...recommended,
+    {
+      ignores: ['build/**', '.next/*']
+    },
+    {
+      plugins: {
+        '@next/next': nextConfig,
+      },
+      rules: {
+        ...nextConfig.configs.recommended.rules,
+        ...nextConfig.configs['core-web-vitals'].rules,
+        '@next/next/no-duplicate-head': 'off',
+      }
+    },
+  ]
+}
 
 export default {
   recommended,
-  nextExtension
+  get nextExtension() {
+    return createNextExtension()
+  },
 }

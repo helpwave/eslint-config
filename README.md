@@ -1,6 +1,8 @@
 ## helpwave eslint config
 This is our recommended set for linting. It is created for **eslint version 9** using the `eslint.config.js` config format.
 
+`recommended` does not depend on Next.js. `nextExtension` loads `@next/eslint-plugin-next` only when that config is used, so install it in projects that spread `configs.nextExtension`.
+
 ### Configs Format
 **recommended**: This is our default config for react (jsx or tsx) projects.
 
